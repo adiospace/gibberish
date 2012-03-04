@@ -111,58 +111,21 @@
   */
 
   g.ago = function() {
-    var config = {
-        prefixAgo: null
-      , prefixFromNow: null
-      , suffixAgo: "ago"
-      , suffixFromNow: "from now"
-
-      , seconds: "less than a minute"
-      , minute: "about a minute"
-      , minutes: "%d minutes"
-      , hour: "about an hour"
-      , hours: "about %d hours"
-      , day: "a day"
-      , days: "%d days"
-      , month: "about a month"
-      , months: "%d months"
-      , year: "about a year"
-      , years: "%d years"
-    };
-
-    var now = +(new Date)
-      , min = now - 7884000000 // 3 months ago
-      , max = now + 7884000000 // 3 months from now
-      , current = g.timestamp(min, max)
-      , distance = now - current
-      , prefix = config.prefixAgo
-      , suffix = config.suffixAgo
-      , seconds = Math.abs(distance) / 1000
-      , minutes = seconds / 60
-      , hours = minutes / 60
-      , days = hours / 24
-      , years = days / 365;
-
-    var result = function(text, number) { 
-      return trim([prefix, text.replace(/%d/i, number), suffix].join(' '));
-    };
-
-    if (distance < 0) {
-      prefix = config.prefixFromNow;
-      suffix = config.suffixFromNow;
-    }
-
-    if (seconds < 45) return result(config.seconds, Math.round(seconds));
-    if (seconds < 90) return result(config.minute, 1);
-    if (minutes < 45) return result(config.minutes, Math.round(minutes));
-    if (minutes < 90) return result(config.hour, 1);
-    if (hours < 24) return result(config.hours, Math.round(hours));
-    if (hours < 48) return result(config.day, 1);
-    if (days < 30) return result(config.days, Math.floor(days));
-    if (days < 60) return result(config.month, 1);
-    if (days < 365) return result(config.months, Math.floor(days / 30));
-    if (years < 2) return result(config.year, 1);
-    return result(config.years, Math.floor(years));
+    var seconds = 'less than a minute'
+      , minute = 'about a minute'
+      , hour = 'about an hour'
+      , day = 'a day'
+      , month = 'about a month'
+      , year = 'about a year'
+      , minutes = g.int(2, 44) + ' minutes'
+      , hours = 'about ' + g.int(2, 23) + ' hours'
+      , days = g.int(2, 29) + ' days'
+      , months = g.int(2, 11) + ' months'
+      , years = g.int(2, 10) + ' years'
+      , all = [seconds, minute, minutes, hour, hours, day, days, month, months, year, years]
+      , index = g.int(0, all.length-1)
+      , suffix = g.bool() ? 'ago' : 'from now';
+    return all[index] + ' ' + suffix;
   };
 
   /**
