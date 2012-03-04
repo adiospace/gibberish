@@ -29,7 +29,7 @@
    * Library version.
    */
 
-  g.version = '0.1.0';
+  g.version = '0.2.0';
 
   /**
    * Check if `n` is a number.
@@ -37,6 +37,27 @@
 
   var isNumber = function(n) {
     return '[object Number]' == {}.toString.call(n);
+  };
+
+  /**
+   * Check if `obj` is a function.
+   */
+
+  var isFunction = function(obj) {
+    return '[object Function]' == {}.toString.call(obj);
+  };
+
+  /**
+   * Trim `text`.
+   */
+
+  var nativeTrim = String.prototype.trim;
+  var trim = function(text) {
+    if (text == null) return '';
+    if (nativeTrim) return nativeTrim.call(text);
+    var trimLeft = /^\s+/
+    , trimRight = /\s+$/;
+    return text.toString().replace(trimLeft, '').replace(trimRight, '');
   };
 
   /** 
@@ -73,7 +94,7 @@
 
   g.timestamp = function() {
     var from = new Date('1900').getTime()
-      , now = new Date().getTime();
+      , now = +(new Date);
     return g.int(from, now);
   };
 
@@ -83,6 +104,61 @@
 
   g.date = function() {
     return new Date(g.timestamp());
+  };
+
+  /**
+  * Random ago strings
+  */
+
+  g.ago = function() {
+    var config = {
+        prefixAgo: null
+      , prefixFromNow: null
+      , suffixAgo: "ago"
+      , suffixFromNow: "from now"
+      , seconds: "less than a minute"
+      , minute: "about a minute"
+      , minutes: "%d minutes"
+      , hour: "about an hour"
+      , hours: "about %d hours"
+      , day: "a day"
+      , days: "%d days"
+      , month: "about a month"
+      , months: "%d months"
+      , year: "about a year"
+      , years: "%d years"
+    };
+
+    var now = +(new Date)
+      , distance = now - g.timestamp()
+      , prefix = config.prefixAgo
+      , suffix = config.suffixAgo
+      , seconds = Math.abs(distance) / 1000
+      , minutes = seconds / 60
+      , hours = minutes / 60
+      , days = hours / 24
+      , years = days / 365;
+
+    var result = function(text, number) { 
+      return trim([prefix, text.replace(/%d/i, number), suffix].join(' '));
+    };
+
+    if (distance < 0) {
+      prefix = config.prefixFromNow;
+      suffix = config.suffixFromNow;
+    }
+
+    if (seconds < 45) return result(config.seconds, Math.round(seconds));
+    if (seconds < 90) return result(config.minute, 1);
+    if (minutes < 45) return result(config.minutes, Math.round(minutes));
+    if (minutes < 90) return result(config.hour, 1);
+    if (hours < 24) return result(config.hours, Math.round(hours));
+    if (hours < 48) return result(config.day, 1);
+    if (days < 30) return result(config.days, Math.floor(days));
+    if (days < 60) return result(config.month, 1);
+    if (days < 365) return result(config.months, Math.floor(days / 30));
+    if (years < 2) return result(config.year, 1);
+    return result(config.years, Math.floor(years));
   };
 
   /**
