@@ -52,9 +52,9 @@ g.ago(); // => 'about a month ago'
 
 .number(FORMART) --random number to generate phone-numbers or other number formatted shit
 
-.email();
-.domain();
-.phone();
-.url();
+.email()
+.domain()
+.phone()
+.url()
 .html()
 ```
