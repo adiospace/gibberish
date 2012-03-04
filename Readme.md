@@ -1,4 +1,3 @@
-
 # gibberish
 
 generate fake... hmm, random data for both node.js and the browser.
@@ -20,6 +19,7 @@ g.id(0); // => 1
 
 // Generate GUIDs; aliased to uuid
 g.guid(); // => '23a52024-6f4b-4478-9b96-fd3df148df38'
+// You can also use uuid() alias
 g.uuid(); // => 'e0a6eaa7-e2c6-469c-51e5-28efe8938f81'
 
 // Generate random int
