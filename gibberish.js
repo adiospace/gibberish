@@ -29,7 +29,7 @@
    * Library version.
    */
 
-  g.version = '0.2.0';
+  g.version = '0.1.1';
 
   /**
    * Check if `n` is a number.
@@ -92,10 +92,10 @@
    * Random timestamps - between 1900 and present
    */
 
-  g.timestamp = function() {
-    var from = new Date('1900').getTime()
-      , now = +(new Date);
-    return g.int(from, now);
+  g.timestamp = function(min, max) {
+    if (!isNumber(min)) min = 0; 
+    if (!isNumber(max)) max = +(new Date);
+    return g.int(min, max);
   };
 
   /**
@@ -116,6 +116,7 @@
       , prefixFromNow: null
       , suffixAgo: "ago"
       , suffixFromNow: "from now"
+
       , seconds: "less than a minute"
       , minute: "about a minute"
       , minutes: "%d minutes"
@@ -130,7 +131,10 @@
     };
 
     var now = +(new Date)
-      , distance = now - g.timestamp()
+      , min = now - 7884000000 // 3 months ago
+      , max = now + 7884000000 // 3 months from now
+      , current = g.timestamp(min, max)
+      , distance = now - current
       , prefix = config.prefixAgo
       , suffix = config.suffixAgo
       , seconds = Math.abs(distance) / 1000

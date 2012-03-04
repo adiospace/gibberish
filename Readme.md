@@ -38,7 +38,7 @@ g.date(); // => Thu, 06 Oct 1983 03:43:06 GMT
 g.timestamp(); // => 1264503305282
 
 // Generate random ago strings
-g.ago(); // => ''
+g.ago(); // => 'about a month ago'
 
 ```
 
