@@ -1,0 +1,9 @@
+{
+    "name": "gibberish"
+  , "version": "0.1.0"
+  , "description": "fake, non-sense, random values"
+  , "repository": {"type": "git", "url": "git://github.com/adrianolaru/gibberish.git"}
+  , "author": "Adrian Olaru <agolaru@gmail.com>"
+  , "keywords": ["fake", "faker", "random","gibberish"]
+  , "main": "gibberish.js"
+}
