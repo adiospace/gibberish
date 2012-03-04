@@ -29,7 +29,7 @@
    * Library version.
    */
 
-  g.version = '0.1.1';
+  g.version = '0.1.2';
 
   /**
    * Check if `n` is a number.

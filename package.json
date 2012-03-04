@@ -1,6 +1,6 @@
 {
     "name": "gibberish"
-  , "version": "0.1.1"
+  , "version": "0.1.2"
   , "description": "Generate fake, non-sense, random data"
   , "repository": {"type": "git", "url": "git://github.com/adrianolaru/gibberish.git"}
   , "author": "Adrian Olaru <agolaru@gmail.com>"
