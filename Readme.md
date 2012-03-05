@@ -1,3 +1,5 @@
+WORK IN PROGRESS
+
 # gibberish
 
 generate fake... hmm, random data for both node.js and the browser.
