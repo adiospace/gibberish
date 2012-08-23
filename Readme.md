@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/adrianolaru/gibberish.png)](http://travis-ci.org/adrianolaru/gibberish)
 WORK IN PROGRESS
 
 # gibberish
